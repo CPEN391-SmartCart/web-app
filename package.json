@@ -1,0 +1,23 @@
+{
+  "name": "web-app",
+  "version": "1.0.0",
+  "description": "Web server for CPEN 391 SmartCart project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CPEN391-TBD/web-app.git"
+  },
+  "author": "CPEN391-TBD",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CPEN391-TBD/web-app/issues"
+  },
+  "homepage": "https://github.com/CPEN391-TBD/web-app#readme",
+  "engines": {
+    "node": "12.x"
+  }
+}
