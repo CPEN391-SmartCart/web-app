@@ -1,4 +1,4 @@
-const { pool } = require('./../config')
+const { pool } = require('./config')
 
 function getItemByBarcode(req, res){
     console.log("GET /items/{{barcode}}")
