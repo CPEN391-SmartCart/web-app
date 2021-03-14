@@ -18,20 +18,7 @@ CREATE TABLE stores (
   PRIMARY KEY (id)  
 );
 
--- Sections(id, store_id, x, y, width, height, colour)
 
-CREATE TABLE sections (
-  id int NOT NULL DEFAULT NEXTVAL ('sections_seq'),
-  store_id int NOT NULL,
-  x int NOT NULL,
-  y int NOT NULL,
-  width int NOT NULL,
-  height int NOT NULL,
-  colour int NOT NULL,
-  PRIMARY KEY (id)
-);
-
-ALTER TABLE sections ADD CONSTRAINT sections_store_id_fk FOREIGN KEY (store_id) REFERENCES stores(id);
 
 -- Legends(id, store_id, key, color)
 
@@ -43,8 +30,23 @@ CREATE TABLE legends (
   PRIMARY KEY (id),
   FOREIGN KEY (store_id) REFERENCES stores(id)
 );
-
 ALTER TABLE legends ADD CONSTRAINT legends_store_id_fk FOREIGN KEY (store_id) REFERENCES stores(id);
+
+-- Sections(id, store_id, x, y, width, height, legend_id)
+
+CREATE TABLE sections (
+  id int NOT NULL DEFAULT NEXTVAL ('sections_seq'),
+  legend_id int NOT NULL,
+  x int NOT NULL,
+  y int NOT NULL,
+  width int NOT NULL,
+  height int NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (legend_id) REFERENCES legends(id)
+);
+
+ALTER TABLE sections ADD CONSTRAINT sections_legends_id_fk FOREIGN KEY (legend_id) REFERENCES legends(id);
+
 
 
 -- Items(barcode, section_id, name, cost, weight, description, requires_weighing, x, y)
@@ -97,11 +99,23 @@ CREATE TABLE receipts (
 
 ALTER TABLE receipts ADD CONSTRAINT receipts_google_id_fk FOREIGN KEY (google_id) REFERENCES users(google_id);
 
+-- sessions(id, google_id, is_active, created_at)
+CREATE TABLE sessions (
+  id int NOT NULL DEFAULT NEXTVAL ('sessions_seq'),
+  google_id int NOT NULL,
+  is_active int NOT NULL,
+  created_at timestamp without time zone default (now() at time zone 'utc'),
+  PRIMARY KEY (id),
+  FOREIGN KEY (google_id) REFERENCES users(google_id)
+);
 
--- CartItems(id, barcode, quantity, weight, cost)
+ALTER TABLE sessions ADD CONSTRAINT sessions_google_id_fk FOREIGN KEY (google_id) REFERENCES users(google_id);
+
+-- CartItems(id, session_id, barcode, quantity, weight, cost)
 
 CREATE TABLE cartItems (
   id int NOT NULL DEFAULT NEXTVAL ('cartItems_seq'),
+  session_id int NOT NULL,
   barcode varchar(50) NOT NULL,
   quantity int NOT NULL,
   weight double precision NOT NULL,
@@ -111,6 +125,7 @@ CREATE TABLE cartItems (
 );
 
 ALTER TABLE cartItems ADD CONSTRAINT cartItems_barcode_fk FOREIGN KEY (barcode) REFERENCES items(barcode);
+ALTER TABLE cartItems ADD CONSTRAINT cartItems_session_id_fk FOREIGN KEY (session_id) REFERENCES sessions(id);
 
 
 
@@ -127,18 +142,6 @@ CREATE TABLE purchasedItems (
 
 ALTER TABLE purchasedItems ADD CONSTRAINT purchasedItems_cart_item_id_fk FOREIGN KEY (cart_item_id) REFERENCES cartItems(id);
 
-CREATE TABLE sessions (
-  id int NOT NULL DEFAULT NEXTVAL ('sessions_seq'),
-  google_id int NOT NULL,
-  is_active int NOT NULL,
-  created_at timestamp without time zone default (now() at time zone 'utc'),
-  PRIMARY KEY (id),
-  FOREIGN KEY (google_id) REFERENCES users(google_id)
-);
-
-ALTER TABLE sessions ADD CONSTRAINT sessions_google_id_fk FOREIGN KEY (google_id) REFERENCES users(google_id);
-
-
 -- Logs(id, google_id, session_id, barcode, measured_weight)
 
 CREATE TABLE logs (
@@ -151,5 +154,3 @@ CREATE TABLE logs (
 );
 
 ALTER TABLE logs ADD CONSTRAINT logs_session_id_fk FOREIGN KEY (session_id) REFERENCES sessions(id);
-
-
