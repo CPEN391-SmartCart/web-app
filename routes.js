@@ -25,9 +25,9 @@ function listLegendsByStoreId(req, res) {
     })
 }
 
-function listSectionsByLegendId(req, res) {
-    console.log("GET /sections/{{legendId}}")
-    pool.query("SELECT * FROM sections WHERE legend_id = $1", [req.params.legendId], function (err, result) {
+function listSectionsByStoreId(req, res) {
+    console.log("GET /sections/{{storeId}}")
+    pool.query("SELECT s.* FROM sections s inner join legends l ON s.legend_id=l.id AND store_id = $1", [req.params.storeId], function (err, result) {
         if (err) {
             res.status(400).send(err)
             return
@@ -36,6 +36,10 @@ function listSectionsByLegendId(req, res) {
         return
     })
 }
+
+
+
+
 
 function getItemByBarcode(req, res) {
     console.log("GET /items/{{barcode}}")
@@ -185,7 +189,7 @@ function checkFloat(dataIn) {
 module.exports = { 
     getStoreById, 
     listLegendsByStoreId,
-    listSectionsByLegendId,
+    listSectionsByStoreId,
     getItemByBarcode,
     listItemsBySectionId,
     getReceiptBySessionId,
