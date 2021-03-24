@@ -27,7 +27,7 @@ function listLegendsByStoreId(req, res) {
 
 function listSectionsByStoreId(req, res) {
     console.log("GET /sections/{{storeId}}")
-    pool.query("SELECT s.x, s.y, s.width, s.height, l.key, l.colour FROM sections s inner join legends l ON s.legend_id=l.id AND store_id = $1", [req.params.storeId], function (err, result) {
+    pool.query("SELECT s.x, s.y, s.width, s.height, l.colour FROM sections s inner join legends l ON s.legend_id=l.id AND store_id = $1", [req.params.storeId], function (err, result) {
         if (err) {
             res.status(400).send(err)
             return
