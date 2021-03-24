@@ -1,3 +1,4 @@
+const { response } = require('express')
 const { pool } = require('./config')
 
 function getStoreById(req, res) {
@@ -38,11 +39,17 @@ function listSectionsByLegendId(req, res) {
 
 function listSectionsByStoreId(req, res) {
     console.log("GET /legends/sections/{{storeId}}")
+    var response_result
+    var counter = 0
+
     pool.query("SELECT * FROM legends WHERE store_id = $1", [req.params.storeId], function (err, legend_ids) {
         if (err) {
             res.status(400).send(err)
             return
         }
+
+        response_result = JSON.parse(legend_ids.rows)
+
 
         console.log("legend_ids:" + legend_ids.rows)
 
@@ -54,15 +61,18 @@ function listSectionsByStoreId(req, res) {
                     res.status(400).send(err)
                     return
                 }
-                legend_ids.rows[i]["sections"] = []
-                legend_ids.rows[i].sections = result.rows
+                response_result[i].sections = result.rows
+                console.log("Here: " + response_result[i])
+                counter++
             })
         }
 
         console.log("\nTest here 5\n")
-        
-        res.status(200).send(legend_ids.rows)
-        return
+
+        if(counter == legend_ids.rows.length){
+            res.status(200).send(response_result)
+            return
+        }
     })
 }
 
