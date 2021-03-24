@@ -37,7 +37,7 @@ function listSectionsByLegendId(req, res) {
 }
 
 function listSectionsByStoreId(req, res) {
-    console.log("GET /sections/{{storeId}}")
+    console.log("GET /legends/sections/{{storeId}}")
     pool.query("SELECT * FROM legends WHERE store_id = $1", [req.params.storeId], function (err, legend_ids) {
         console.log("\nTest here 1\n")
 
