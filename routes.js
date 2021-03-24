@@ -44,6 +44,8 @@ function listSectionsByStoreId(req, res) {
             return
         }
 
+        console.log(legend_ids.rows)
+
         for(var i = 0; i < legend_ids.rows.length; i++){
             var legend_id = legend_ids.rows[i].id
             pool.query("SELECT * FROM sections WHERE legend_id = $1", [legend_id], function (err, result) {
