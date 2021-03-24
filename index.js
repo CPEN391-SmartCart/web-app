@@ -17,7 +17,6 @@ app.get('/_health', (req, res) => {
 app.get('/stores/:storeId', routes.getStoreById)
 app.get('/legends/:storeId', routes.listLegendsByStoreId)
 app.get('/sections/:legendId', routes.listSectionsByLegendId)
-app.get('/legends/sections/:storeId', routes.listSectionsByStoreId)
 app.get('/items/:barcode', routes.getItemByBarcode)
 app.get('/items/:sectionId', routes.listItemsBySectionId)
 app.get('/receipts/:sessionId', routes.getReceiptBySessionId)

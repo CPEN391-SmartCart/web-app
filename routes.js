@@ -37,45 +37,6 @@ function listSectionsByLegendId(req, res) {
     })
 }
 
-function listSectionsByStoreId(req, res) {
-    console.log("GET /legends/sections/{{storeId}}")
-    var response_result
-    var counter = 0
-
-    pool.query("SELECT * FROM legends WHERE store_id = $1", [req.params.storeId], function (err, legend_ids) {
-        if (err) {
-            res.status(400).send(err)
-            return
-        }
-
-        response_result = JSON.parse(legend_ids.rows)
-
-
-        console.log("legend_ids:" + legend_ids.rows)
-
-        for(var i = 0; i < legend_ids.rows.length; i++){
-            var legend_id = legend_ids.rows[i].id
-
-            pool.query("SELECT * FROM sections WHERE legend_id = $1", [legend_id], function (err, result) {
-                if (err) {
-                    res.status(400).send(err)
-                    return
-                }
-                response_result[i].sections = result.rows
-                console.log("Here: " + response_result[i])
-                counter++
-            })
-        }
-
-        console.log("\nTest here 5\n")
-
-        if(counter == legend_ids.rows.length){
-            res.status(200).send(response_result)
-            return
-        }
-    })
-}
-
 function getItemByBarcode(req, res) {
     console.log("GET /items/{{barcode}}")
     pool.query("SELECT * FROM items WHERE barcode = $1", [req.params.barcode], function (err, result) {
@@ -231,6 +192,5 @@ module.exports = {
     listReceiptsByGoogleId,
     listCartItemsBySessionId,
     listPurchasedItemsByReceiptId,
-    listLogsBySessionId,
-    listSectionsByStoreId
+    listLogsBySessionId
 }
