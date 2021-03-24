@@ -54,7 +54,7 @@ function listSectionsByStoreId(req, res) {
                     res.status(400).send(err)
                     return
                 }
-                legend_ids.rows[i].sections = []
+                legend_ids.rows[i]["sections"] = []
                 legend_ids.rows[i].sections = result.rows
             })
         }
