@@ -39,27 +39,23 @@ function listSectionsByLegendId(req, res) {
 function listSectionsByStoreId(req, res) {
     console.log("GET /legends/sections/{{storeId}}")
     pool.query("SELECT * FROM legends WHERE store_id = $1", [req.params.storeId], function (err, legend_ids) {
-        console.log("\nTest here 1\n")
-
         if (err) {
             res.status(400).send(err)
             return
         }
 
-        console.log("\nTest here 2\n")
+        console.log("legend_ids:" + legend_ids.rows)
 
         for(var i = 0; i < legend_ids.rows.length; i++){
             var legend_id = legend_ids.rows[i].id
-            console.log("\nTest here 3\n")
 
             pool.query("SELECT * FROM sections WHERE legend_id = $1", [legend_id], function (err, result) {
                 if (err) {
                     res.status(400).send(err)
                     return
                 }
+                legend_ids.rows[i].sections = {}
                 legend_ids.rows[i].sections = result.rows
-                console.log("\nTest here 4\n")
-
             })
         }
 
