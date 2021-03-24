@@ -199,3 +199,71 @@ INSERT INTO logs(session_id,barcode,measured_weight) VALUES
 ,(1,'XNQV4914',12.8)
 ,(9,'XNQV4914',4.2)
 ,(5,'OOAZ7866',93.4);
+
+
+
+-- new DATA
+insert into legends (store_id, key, colour) values (1, 'FROZEN FOOD', 15); 21
+insert into legends (store_id, key, colour) values (1, 'FRUITS AND VEGETABLES', 46); 
+insert into legends (store_id, key, colour) values (1, 'STAPLES', 30); 
+insert into legends (store_id, key, colour) values (1, 'CONDIMENTS', 13);
+insert into legends (store_id, key, colour) values (1, 'PHARMA AND SELF-CARE', 23);
+insert into legends (store_id, key, colour) values (1, 'BAKERY', 63);
+insert into legends (store_id, key, colour) values (1, 'BREAKFAST', 10);
+insert into legends (store_id, key, colour) values (1, 'CHECKOUT COUNTERS', 9); 
+
+insert into sections (legend_id, x, y, width, height) values (21, 319, 264, 12, 61);
+insert into sections (legend_id, x, y, width, height) values (21, 319, 327, 12, 96);
+insert into sections (legend_id, x, y, width, height) values (21, 287, 216, 98, 17);
+insert into sections (legend_id, x, y, width, height) values (21, 34, 135, 59, 18);
+insert into sections (legend_id, x, y, width, height) values (21, 34, 171, 59, 18);
+insert into sections (legend_id, x, y, width, height) values (21, 34, 207, 59, 18);
+insert into sections (legend_id, x, y, width, height) values (21, 34, 243, 98, 17);
+insert into sections (legend_id, x, y, width, height) values (21, 34, 28, 59, 17);
+insert into sections (legend_id, x, y, width, height) values (21, 34, 328, 98, 17);
+insert into sections (legend_id, x, y, width, height) values (21, 319, 264, 12, 61);
+insert into sections (legend_id, x, y, width, height) values (21, 34, 360, 79, 18);
+insert into sections (legend_id, x, y, width, height) values (21, 34, 394, 79, 17);
+insert into sections (legend_id, x, y, width, height) values (21, 34, 428, 79, 17);
+insert into sections (legend_id, x, y, width, height) values (21, 34, 64, 59, 17);
+insert into sections (legend_id, x, y, width, height) values (21, 34, 99, 59, 17);
+insert into sections (legend_id, x, y, width, height) values (21, 45, 278, 19, 33);
+insert into sections (legend_id, x, y, width, height) values (21, 429, 29, 21, 160);
+
+insert into sections (legend_id, x, y, width, height) values (22, 347, 264, 13, 61);
+insert into sections (legend_id, x, y, width, height) values (22, 347, 327, 13, 96);
+insert into sections (legend_id, x, y, width, height) values (22, 381, 264, 21, 71);
+insert into sections (legend_id, x, y, width, height) values (22, 381, 29, 21, 160);
+insert into sections (legend_id, x, y, width, height) values (22, 381, 373, 21, 72);
+
+insert into sections (legend_id, x, y, width, height) values (23, 151, 243, 62, 17);
+insert into sections (legend_id, x, y, width, height) values (23, 151, 328, 62, 17);
+insert into sections (legend_id, x, y, width, height) values (23, 151, 360, 62, 18);
+insert into sections (legend_id, x, y, width, height) values (23, 151, 394, 62, 17);
+insert into sections (legend_id, x, y, width, height) values (23, 151, 428, 62, 17);
+
+insert into sections (legend_id, x, y, width, height) values (24, 431, 216, 98, 17);
+insert into sections (legend_id, x, y, width, height) values (24, 431, 264, 19, 71);
+insert into sections (legend_id, x, y, width, height) values (24, 24, 373, 19, 72);
+
+insert into sections (legend_id, x, y, width, height) values (25, 527, 264, 19, 71);
+insert into sections (legend_id, x, y, width, height) values (25, 527, 29, 19, 160);
+insert into sections (legend_id, x, y, width, height) values (25, 527, 373, 19, 72);
+
+insert into sections (legend_id, x, y, width, height) values (26, 478, 264, 20, 71); 
+insert into sections (legend_id, x, y, width, height) values (26, 478, 29, 20, 160); 
+insert into sections (legend_id, x, y, width, height) values (26, 478, 373, 20, 72); 
+
+insert into sections (legend_id, x, y, width, height) values (27, 290, 264, 13, 61); 
+insert into sections (legend_id, x, y, width, height) values (27, 290, 327, 13, 96); 
+insert into sections (legend_id, x, y, width, height) values (27, 299, 123, 61, 18); 
+insert into sections (legend_id, x, y, width, height) values (27, 299, 171, 61, 18); 
+insert into sections (legend_id, x, y, width, height) values (27, 299, 29, 61, 17); 
+insert into sections (legend_id, x, y, width, height) values (27, 299, 77, 61, 17); 
+
+insert into sections (legend_id, x, y, width, height) values (28, 132, 135, 81, 18);
+insert into sections (legend_id, x, y, width, height) values (28, 132, 171, 81, 18);
+insert into sections (legend_id, x, y, width, height) values (28, 132, 207, 81, 18);
+insert into sections (legend_id, x, y, width, height) values (28, 132, 28, 81, 17);
+insert into sections (legend_id, x, y, width, height) values (28, 132, 64, 81, 17);
+insert into sections (legend_id, x, y, width, height) values (28, 132, 99, 81, 17);

@@ -36,6 +36,30 @@ function listSectionsByLegendId(req, res) {
     })
 }
 
+function listSectionsByStoreId(req, res) {
+    console.log("GET /sections/{{storeId}}")
+    pool.query("SELECT id FROM legends WHERE store_id = $1", [req.params.storeId], function (err, legend_ids) {
+        if (err) {
+            res.status(400).send(err)
+            return
+        }
+
+        for(var i = 0; i < legend_ids.rows.length; i++){
+            var legend_id = legend_ids.rows[i].id
+            pool.query("SELECT * FROM sections WHERE legend_id = $1", [legend_id], function (err, result) {
+                if (err) {
+                    res.status(400).send(err)
+                    return
+                }
+                legend_ids.rows[i].sections = result.rows
+            })
+        }
+
+        res.status(200).send(legend_ids.rows)
+        return
+    })
+}
+
 function getItemByBarcode(req, res) {
     console.log("GET /items/{{barcode}}")
     pool.query("SELECT * FROM items WHERE barcode = $1", [req.params.barcode], function (err, result) {
@@ -191,5 +215,6 @@ module.exports = {
     listReceiptsByGoogleId,
     listCartItemsBySessionId,
     listPurchasedItemsByReceiptId,
-    listLogsBySessionId
+    listLogsBySessionId,
+    listSectionsByStoreId
 }

@@ -18,8 +18,6 @@ CREATE TABLE stores (
   PRIMARY KEY (id)  
 );
 
-
-
 -- Legends(id, store_id, key, color)
 
 CREATE TABLE legends (
@@ -29,8 +27,11 @@ CREATE TABLE legends (
   colour int NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (store_id) REFERENCES stores(id)
+    ON DELETE CASCADE 
+    ON UPDATE CASCADE 
 );
-ALTER TABLE legends ADD CONSTRAINT legends_store_id_fk FOREIGN KEY (store_id) REFERENCES stores(id);
+
+-- ALTER TABLE legends ADD CONSTRAINT legends_store_id_fk FOREIGN KEY (store_id) REFERENCES stores(id);
 
 -- Sections(id, store_id, x, y, width, height, legend_id)
 
@@ -43,11 +44,11 @@ CREATE TABLE sections (
   height int NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (legend_id) REFERENCES legends(id)
+    ON DELETE CASCADE 
+    ON UPDATE CASCADE 
 );
 
-ALTER TABLE sections ADD CONSTRAINT sections_legends_id_fk FOREIGN KEY (legend_id) REFERENCES legends(id);
-
-
+-- ALTER TABLE sections ADD CONSTRAINT sections_legends_id_fk FOREIGN KEY (legend_id) REFERENCES legends(id);
 
 -- Items(barcode, section_id, name, cost, weight, description, requires_weighing, x, y)
 
@@ -64,9 +65,11 @@ CREATE TABLE items (
   updated_at timestamp,
   PRIMARY KEY (barcode),
   FOREIGN KEY (section_id) REFERENCES sections(id)
+    ON DELETE CASCADE 
+    ON UPDATE CASCADE 
 );
 
-ALTER TABLE items ADD CONSTRAINT items_section_id_fk FOREIGN KEY (section_id) REFERENCES sections(id);
+-- ALTER TABLE items ADD CONSTRAINT items_section_id_fk FOREIGN KEY (section_id) REFERENCES sections(id);
 
 
 -- Users(google_id, name, email, phone_number)
@@ -95,9 +98,11 @@ CREATE TABLE receipts (
   is_paid int NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (google_id) REFERENCES users(google_id)
+    ON DELETE CASCADE 
+    ON UPDATE CASCADE 
 );
 
-ALTER TABLE receipts ADD CONSTRAINT receipts_google_id_fk FOREIGN KEY (google_id) REFERENCES users(google_id);
+-- ALTER TABLE receipts ADD CONSTRAINT receipts_google_id_fk FOREIGN KEY (google_id) REFERENCES users(google_id);
 
 -- sessions(id, google_id, is_active, created_at)
 CREATE TABLE sessions (
@@ -107,9 +112,11 @@ CREATE TABLE sessions (
   created_at timestamp without time zone default (now() at time zone 'utc'),
   PRIMARY KEY (id),
   FOREIGN KEY (google_id) REFERENCES users(google_id)
+    ON DELETE CASCADE 
+    ON UPDATE CASCADE 
 );
 
-ALTER TABLE sessions ADD CONSTRAINT sessions_google_id_fk FOREIGN KEY (google_id) REFERENCES users(google_id);
+-- ALTER TABLE sessions ADD CONSTRAINT sessions_google_id_fk FOREIGN KEY (google_id) REFERENCES users(google_id);
 
 -- CartItems(id, session_id, barcode, quantity, weight, cost)
 
@@ -122,10 +129,15 @@ CREATE TABLE cartItems (
   cost double precision NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (barcode) REFERENCES items(barcode)
+    ON DELETE CASCADE 
+    ON UPDATE CASCADE,
+  FOREIGN KEY (session_id) REFERENCES sessions(id)
+    ON DELETE CASCADE 
+    ON UPDATE CASCADE 
 );
 
-ALTER TABLE cartItems ADD CONSTRAINT cartItems_barcode_fk FOREIGN KEY (barcode) REFERENCES items(barcode);
-ALTER TABLE cartItems ADD CONSTRAINT cartItems_session_id_fk FOREIGN KEY (session_id) REFERENCES sessions(id);
+-- ALTER TABLE cartItems ADD CONSTRAINT cartItems_barcode_fk FOREIGN KEY (barcode) REFERENCES items(barcode);
+-- ALTER TABLE cartItems ADD CONSTRAINT cartItems_session_id_fk FOREIGN KEY (session_id) REFERENCES sessions(id);
 
 
 
@@ -136,11 +148,15 @@ CREATE TABLE purchasedItems (
   receipt_id int NOT NULL,
   cart_item_id int NOT NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY (receipt_id) REFERENCES receipts(id),
+  FOREIGN KEY (receipt_id) REFERENCES receipts(id)
+    ON DELETE CASCADE 
+    ON UPDATE CASCADE ,
   FOREIGN KEY (cart_item_id) REFERENCES cartItems(id)
+    ON DELETE CASCADE 
+    ON UPDATE CASCADE 
 );
 
-ALTER TABLE purchasedItems ADD CONSTRAINT purchasedItems_cart_item_id_fk FOREIGN KEY (cart_item_id) REFERENCES cartItems(id);
+-- ALTER TABLE purchasedItems ADD CONSTRAINT purchasedItems_cart_item_id_fk FOREIGN KEY (cart_item_id) REFERENCES cartItems(id);
 
 -- Logs(id, google_id, session_id, barcode, measured_weight)
 
@@ -151,6 +167,8 @@ CREATE TABLE logs (
   measured_weight double precision NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (session_id) REFERENCES sessions(id)
+    ON DELETE CASCADE 
+    ON UPDATE CASCADE 
 );
 
-ALTER TABLE logs ADD CONSTRAINT logs_session_id_fk FOREIGN KEY (session_id) REFERENCES sessions(id);
+-- ALTER TABLE logs ADD CONSTRAINT logs_session_id_fk FOREIGN KEY (session_id) REFERENCES sessions(id);
