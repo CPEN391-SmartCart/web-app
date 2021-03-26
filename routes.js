@@ -38,7 +38,17 @@ function listSectionsByStoreId(req, res) {
 }
 
 
-
+function getItemByBarcodeTest(req, res) {
+    console.log("GET /items/{{barcode}}")
+    pool.query("SELECT i.* , l.colour FROM items i inner join sections s ON i.section_id = s.id AND barcode = $1 inner join legends l on s.legend_id = l.id ", [req.params.barcode], function (err, result) {
+        if (err) {
+            res.status(400).send(err)
+            return
+        }
+        res.status(200).send(result.rows[0])
+        return
+    })
+}
 
 
 function getItemByBarcode(req, res) {

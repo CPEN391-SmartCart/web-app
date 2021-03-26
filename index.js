@@ -25,4 +25,7 @@ app.get('/cart-items/:sessionId', routes.listCartItemsBySessionId)
 app.get('/purchased-items/:receiptId', routes.listPurchasedItemsByReceiptId)
 app.get('/logs/:sessionId', routes.listLogsBySessionId)
 
+app.get('/items-test/:barcode', routes.getItemByBarcodeTest)
+
+
 module.exports = app
