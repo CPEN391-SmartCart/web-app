@@ -206,5 +206,6 @@ module.exports = {
     listReceiptsByGoogleId,
     listCartItemsBySessionId,
     listPurchasedItemsByReceiptId,
-    listLogsBySessionId
+    listLogsBySessionId,
+    getItemByBarcodeTest
 }
