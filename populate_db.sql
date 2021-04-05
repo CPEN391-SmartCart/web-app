@@ -52,27 +52,20 @@ INSERT INTO sections(x,y,width,height,legend_id) VALUES
 ,(229,144,49,45,4);
 
 
+
 INSERT INTO items(barcode,section_id,name,cost, weight, description,requires_weighing,x,y,created_at,updated_at) VALUES
- ('XEAQ5424','6','plum tomatoes',94.0,52.4,'Pharmacy',0,130,468,'NOW()','NOW()')
-,('XGAO9797','5','oysters and their liquor',56.5,18.1'Snack',1,89,196,'NOW()','NOW()')
-,('XNQV4914','9','butter',86.0,52.9'Drink',1,400,203,'NOW()','NOW()')
-,('SCEU6683','1','bread crumbs',28.2,420'Frozen',1,156,389,'NOW()','NOW()')
-,('THEY8635','5','Creole seasoning',60.6,9.11,'Snack',1,476,41,'NOW()','NOW()')
-,('NTSN6378','7','chestnuts',72.1,16,'Dairy',0,336,444,'NOW()','NOW()')
-,('GNLK7691','6','stock',57.8,99.9,'Drink',0,265,127,'NOW()','NOW()')
-,('VUGQ0044','4','oysters and their liquor',71.9,10.0,'Snack',1,386,163,'NOW()','NOW()')
-,('OOAZ7866','2','onions',10.1,1.25,'Drink',1,189,221,'NOW()','NOW()')
-,('ZTZZ2398','7','oysters and their liquor',72.2,9.99,'Drink',1,54,390,'NOW()','NOW()')
-,('VCRG1272','4','onion',95.5,6.0,'Deli',0,462,42,'NOW()','NOW()')
-,('CXKC2105','3','black pepper',0.5,66.1,'Frozen',0,241,141,'NOW()','NOW()')
-,('ORQA2700','8','Louisiana hot sauce',54.7,9.10,'Frozen',1,43,429,'NOW()','NOW()')
-,('SNBN0794','10','stock',45.1,45,'Deli',1,479,4,'NOW()','NOW()')
-,('RCJJ7746','1','butter',16.7,14.25,'Frozen',0,223,426,'NOW()','NOW()')
-,('SFZH6877','2','Louisiana hot sauce',83.3,11,'Pharmacy',0,485,438,'NOW()','NOW()')
-,('WAOQ1516','8','flour',21.8,1.61,'Snack',1,76,33,'NOW()','NOW()')
-,('WBPG8611','10','onions',8.6,3.14,'Snack',0,415,259,'NOW()','NOW()')
-,('VFDE4304','4','Salt',96.0,1.00,'Deli',1,127,83,'NOW()','NOW()')
-,('KHYT1504','2','bay leaves',7.0,920.02,'Pharmacy',0,293,426,'NOW()','NOW()');
+('XEAQ5424',6,'Advil',94,20,'Pharmacy',0,190,115,'2021-03-24 06:15:11.72186','2021-03-24 06:15:11.72186'),
+('XGAO9797',5,'Doritos',56.5,57.3'Snack',1,71,44,'2021-03-24 06:15:11.72186','2021-03-24 06:15:11.72186'),
+('SCEU6683',1,'Frozen Lasagna',28.2,11.2,'Frozen',1,65,292,'2021-03-24 06:15:11.72186','2021-03-24 06:15:11.72186'),
+('THEY8635',5,'Creole seasoning',60.6,420,'Snack',1,161,377,'2021-03-24 06:15:11.72186','2021-03-24 06:15:11.72186'),
+('NTSN6378',7,'2% Milk',72.1,9.11,'Dairy',0,317,306,'2021-03-24 06:15:11.72186','2021-03-24 06:15:11.72186'),
+('GNLK7691',6,'Orange Juice',57.8,10.21,'Drink',0,310,216,'2021-03-24 06:15:11.72186','2021-03-24 06:15:11.72186'),
+('ZTZZ2398',7,'Gatorade',72.2,69.1,'Drink',1,345,46,'2021-03-24 06:15:11.72186','2021-03-24 06:15:11.72186'),
+('CXKC2105',3,'Black pepper',66.1,66.6,'Frozen',0,401,410,'2021-03-24 06:15:11.72186','2021-03-24 06:15:11.72186'),
+('SNBN0794',10,'Chicken',45.1,80.0,'Deli',1,527,91,'2021-03-24 06:15:11.72186','2021-03-24 06:15:11.72186'),
+('RCJJ7746',1,'Butter',16.7,81.35,'Frozen',0,547,140,'2021-03-24 06:15:11.72186','2021-03-24 06:15:11.72186'),
+('WBPG8611',10,'Cookies',8.6,11.2,'Snack',0,477,41,'2021-03-24 06:15:11.72186','2021-03-24 06:15:11.72186');
+
 
 INSERT INTO users(google_id,name,email,phone_number,created_at,updated_at) VALUES
  ('1','Abbie, Abby','PSF@gmail.com',74034909,'NOW()','NOW()')
@@ -203,67 +196,75 @@ INSERT INTO logs(session_id,barcode,measured_weight) VALUES
 
 
 -- new DATA
-insert into legends (store_id, key, colour) values (1, 'FROZEN FOOD', 15); 21
-insert into legends (store_id, key, colour) values (1, 'FRUITS AND VEGETABLES', 46); 
-insert into legends (store_id, key, colour) values (1, 'STAPLES', 30); 
-insert into legends (store_id, key, colour) values (1, 'CONDIMENTS', 13);
-insert into legends (store_id, key, colour) values (1, 'PHARMA AND SELF-CARE', 23);
-insert into legends (store_id, key, colour) values (1, 'BAKERY', 63);
-insert into legends (store_id, key, colour) values (1, 'BREAKFAST', 10);
-insert into legends (store_id, key, colour) values (1, 'CHECKOUT COUNTERS', 9); 
+INSERT INTO legends (store_id, key, colour) VALUES 
+(1, 'FROZEN FOOD', 15),
+(1, 'FRUITS AND VEGETABLES', 46), 
+(1, 'STAPLES', 30), 
+(1, 'CONDIMENTS', 13),
+(1, 'PHARMA AND SELF-CARE', 23),
+(1, 'BAKERY', 63),
+(1, 'BREAKFAST', 10),
+(1, 'CHECKOUT COUNTERS', 9); 
 
-insert into sections (legend_id, x, y, width, height) values (21, 319, 264, 12, 61);
-insert into sections (legend_id, x, y, width, height) values (21, 319, 327, 12, 96);
-insert into sections (legend_id, x, y, width, height) values (21, 287, 216, 98, 17);
-insert into sections (legend_id, x, y, width, height) values (21, 34, 135, 59, 18);
-insert into sections (legend_id, x, y, width, height) values (21, 34, 171, 59, 18);
-insert into sections (legend_id, x, y, width, height) values (21, 34, 207, 59, 18);
-insert into sections (legend_id, x, y, width, height) values (21, 34, 243, 98, 17);
-insert into sections (legend_id, x, y, width, height) values (21, 34, 28, 59, 17);
-insert into sections (legend_id, x, y, width, height) values (21, 34, 328, 98, 17);
-insert into sections (legend_id, x, y, width, height) values (21, 319, 264, 12, 61);
-insert into sections (legend_id, x, y, width, height) values (21, 34, 360, 79, 18);
-insert into sections (legend_id, x, y, width, height) values (21, 34, 394, 79, 17);
-insert into sections (legend_id, x, y, width, height) values (21, 34, 428, 79, 17);
-insert into sections (legend_id, x, y, width, height) values (21, 34, 64, 59, 17);
-insert into sections (legend_id, x, y, width, height) values (21, 34, 99, 59, 17);
-insert into sections (legend_id, x, y, width, height) values (21, 45, 278, 19, 33);
-insert into sections (legend_id, x, y, width, height) values (21, 429, 29, 21, 160);
+INSERT INTO sections (legend_id, x, y, width, height) VALUES 
+(21, 319, 264, 12, 61),
+(21, 319, 327, 12, 96),
+(21, 287, 216, 98, 17),
+(21, 34, 135, 59, 18),
+(21, 34, 171, 59, 18),
+(21, 34, 207, 59, 18),
+(21, 34, 243, 98, 17),
+(21, 34, 28, 59, 17),
+(21, 34, 328, 98, 17),
+(21, 319, 264, 12, 61),
+(21, 34, 360, 79, 18),
+(21, 34, 394, 79, 17),
+(21, 34, 428, 79, 17),
+(21, 34, 64, 59, 17),
+(21, 34, 99, 59, 17),
+(21, 45, 278, 19, 33),
+(21, 429, 29, 21, 160),
+(22, 347, 264, 13, 61),
+(22, 347, 327, 13, 96),
+(22, 381, 264, 21, 71),
+(22, 381, 29, 21, 160),
+(22, 381, 373, 21, 72),
+(23, 151, 243, 62, 17),
+(23, 151, 328, 62, 17),
+(23, 151, 360, 62, 18),
+(23, 151, 394, 62, 17),
+(23, 151, 428, 62, 17),
+(24, 431, 216, 98, 17),
+(24, 431, 264, 19, 71),
+(24, 24, 373, 19, 72),
+(25, 527, 264, 19, 71),
+(25, 527, 29, 19, 160),
+(25, 527, 373, 19, 72),
+(26, 478, 264, 20, 71), 
+(26, 478, 29, 20, 160), 
+(26, 478, 373, 20, 72), 
+(27, 290, 264, 13, 61), 
+(27, 290, 327, 13, 96), 
+(27, 299, 123, 61, 18), 
+(27, 299, 171, 61, 18), 
+(27, 299, 29, 61, 17), 
+(27, 299, 77, 61, 17), 
+(28, 132, 135, 81, 18),
+(28, 132, 171, 81, 18),
+(28, 132, 207, 81, 18),
+(28, 132, 28, 81, 17),
+(28, 132, 64, 81, 17),
+(28, 132, 99, 81, 17);
 
-insert into sections (legend_id, x, y, width, height) values (22, 347, 264, 13, 61);
-insert into sections (legend_id, x, y, width, height) values (22, 347, 327, 13, 96);
-insert into sections (legend_id, x, y, width, height) values (22, 381, 264, 21, 71);
-insert into sections (legend_id, x, y, width, height) values (22, 381, 29, 21, 160);
-insert into sections (legend_id, x, y, width, height) values (22, 381, 373, 21, 72);
-
-insert into sections (legend_id, x, y, width, height) values (23, 151, 243, 62, 17);
-insert into sections (legend_id, x, y, width, height) values (23, 151, 328, 62, 17);
-insert into sections (legend_id, x, y, width, height) values (23, 151, 360, 62, 18);
-insert into sections (legend_id, x, y, width, height) values (23, 151, 394, 62, 17);
-insert into sections (legend_id, x, y, width, height) values (23, 151, 428, 62, 17);
-
-insert into sections (legend_id, x, y, width, height) values (24, 431, 216, 98, 17);
-insert into sections (legend_id, x, y, width, height) values (24, 431, 264, 19, 71);
-insert into sections (legend_id, x, y, width, height) values (24, 24, 373, 19, 72);
-
-insert into sections (legend_id, x, y, width, height) values (25, 527, 264, 19, 71);
-insert into sections (legend_id, x, y, width, height) values (25, 527, 29, 19, 160);
-insert into sections (legend_id, x, y, width, height) values (25, 527, 373, 19, 72);
-
-insert into sections (legend_id, x, y, width, height) values (26, 478, 264, 20, 71); 
-insert into sections (legend_id, x, y, width, height) values (26, 478, 29, 20, 160); 
-insert into sections (legend_id, x, y, width, height) values (26, 478, 373, 20, 72); 
-
-insert into sections (legend_id, x, y, width, height) values (27, 290, 264, 13, 61); 
-insert into sections (legend_id, x, y, width, height) values (27, 290, 327, 13, 96); 
-insert into sections (legend_id, x, y, width, height) values (27, 299, 123, 61, 18); 
-insert into sections (legend_id, x, y, width, height) values (27, 299, 171, 61, 18); 
-insert into sections (legend_id, x, y, width, height) values (27, 299, 29, 61, 17); 
-insert into sections (legend_id, x, y, width, height) values (27, 299, 77, 61, 17); 
-
-insert into sections (legend_id, x, y, width, height) values (28, 132, 135, 81, 18);
-insert into sections (legend_id, x, y, width, height) values (28, 132, 171, 81, 18);
-insert into sections (legend_id, x, y, width, height) values (28, 132, 207, 81, 18);
-insert into sections (legend_id, x, y, width, height) values (28, 132, 28, 81, 17);
-insert into sections (legend_id, x, y, width, height) values (28, 132, 64, 81, 17);
-insert into sections (legend_id, x, y, width, height) values (28, 132, 99, 81, 17);
+INSERT INTO itemnodes VALUES
+(XEAQ5424,89,0,0,5,79,34,47,21,164,0,0,0,0,0,0),
+(XGAO9797,90,0,0,3,42,19,46,32,165,0,0,0,0,0,0),
+(SCEU6683,91,0,0,11,25,12,28,0,0,0,0,0,0,0,0),
+(THEY8635,92,0,0,15,30,16,52,41,76,28,135,0,0,0,0),
+(NTSN6378,93,0,0,48,57,45,126,0,0,0,0,0,0,0,0),
+(GNLK7691,94,0,0,36,76,69,107,70,63,71,23,67,203,68,155),
+(ZTZZ2398,95,0,0,76,55,77,30,0,0,0,0,0,0,0,0),
+(CXKC2105,96,0,0,54,43,61,59,62,162,69,209,80,387,0,0),
+(SNBN0794,98,0,0,67,112,82,69,0,0,0,0,0,0,0,0),
+(RCJJ7746,99,0,0,57,310,58,213,65,109,66,62,83,117,0,0),
+(WBPG8611,100,0,0,68,162,81,22,0,0,0,0,0,0,0,0);
