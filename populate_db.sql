@@ -52,27 +52,27 @@ INSERT INTO sections(x,y,width,height,legend_id) VALUES
 ,(229,144,49,45,4);
 
 
-INSERT INTO items(barcode,section_id,name,cost,description,requires_weighing,x,y,created_at,updated_at) VALUES
- ('XEAQ5424','6','plum tomatoes',94.0,'Pharmacy',0,130,468,'NOW()','NOW()')
-,('XGAO9797','5','oysters and their liquor',56.5,'Snack',1,89,196,'NOW()','NOW()')
-,('XNQV4914','9','butter',86.0,'Drink',1,400,203,'NOW()','NOW()')
-,('SCEU6683','1','bread crumbs',28.2,'Frozen',1,156,389,'NOW()','NOW()')
-,('THEY8635','5','Creole seasoning',60.6,'Snack',1,476,41,'NOW()','NOW()')
-,('NTSN6378','7','chestnuts',72.1,'Dairy',0,336,444,'NOW()','NOW()')
-,('GNLK7691','6','stock',57.8,'Drink',0,265,127,'NOW()','NOW()')
-,('VUGQ0044','4','oysters and their liquor',71.9,'Snack',1,386,163,'NOW()','NOW()')
-,('OOAZ7866','2','onions',10.1,'Drink',1,189,221,'NOW()','NOW()')
-,('ZTZZ2398','7','oysters and their liquor',72.2,'Drink',1,54,390,'NOW()','NOW()')
-,('VCRG1272','4','onion',95.5,'Deli',0,462,42,'NOW()','NOW()')
-,('CXKC2105','3','black pepper',66.1,'Frozen',0,241,141,'NOW()','NOW()')
-,('ORQA2700','8','Louisiana hot sauce',54.7,'Frozen',1,43,429,'NOW()','NOW()')
-,('SNBN0794','10','stock',45.1,'Deli',1,479,4,'NOW()','NOW()')
-,('RCJJ7746','1','butter',16.7,'Frozen',0,223,426,'NOW()','NOW()')
-,('SFZH6877','2','Louisiana hot sauce',83.3,'Pharmacy',0,485,438,'NOW()','NOW()')
-,('WAOQ1516','8','flour',21.8,'Snack',1,76,33,'NOW()','NOW()')
-,('WBPG8611','10','onions',8.6,'Snack',0,415,259,'NOW()','NOW()')
-,('VFDE4304','4','Salt',96.0,'Deli',1,127,83,'NOW()','NOW()')
-,('KHYT1504','2','bay leaves',7.0,'Pharmacy',0,293,426,'NOW()','NOW()');
+INSERT INTO items(barcode,section_id,name,cost, weight, description,requires_weighing,x,y,created_at,updated_at) VALUES
+ ('XEAQ5424','6','plum tomatoes',94.0,52.4,'Pharmacy',0,130,468,'NOW()','NOW()')
+,('XGAO9797','5','oysters and their liquor',56.5,18.1'Snack',1,89,196,'NOW()','NOW()')
+,('XNQV4914','9','butter',86.0,52.9'Drink',1,400,203,'NOW()','NOW()')
+,('SCEU6683','1','bread crumbs',28.2,420'Frozen',1,156,389,'NOW()','NOW()')
+,('THEY8635','5','Creole seasoning',60.6,9.11,'Snack',1,476,41,'NOW()','NOW()')
+,('NTSN6378','7','chestnuts',72.1,16,'Dairy',0,336,444,'NOW()','NOW()')
+,('GNLK7691','6','stock',57.8,99.9,'Drink',0,265,127,'NOW()','NOW()')
+,('VUGQ0044','4','oysters and their liquor',71.9,10.0,'Snack',1,386,163,'NOW()','NOW()')
+,('OOAZ7866','2','onions',10.1,1.25,'Drink',1,189,221,'NOW()','NOW()')
+,('ZTZZ2398','7','oysters and their liquor',72.2,9.99,'Drink',1,54,390,'NOW()','NOW()')
+,('VCRG1272','4','onion',95.5,6.0,'Deli',0,462,42,'NOW()','NOW()')
+,('CXKC2105','3','black pepper',0.5,66.1,'Frozen',0,241,141,'NOW()','NOW()')
+,('ORQA2700','8','Louisiana hot sauce',54.7,9.10,'Frozen',1,43,429,'NOW()','NOW()')
+,('SNBN0794','10','stock',45.1,45,'Deli',1,479,4,'NOW()','NOW()')
+,('RCJJ7746','1','butter',16.7,14.25,'Frozen',0,223,426,'NOW()','NOW()')
+,('SFZH6877','2','Louisiana hot sauce',83.3,11,'Pharmacy',0,485,438,'NOW()','NOW()')
+,('WAOQ1516','8','flour',21.8,1.61,'Snack',1,76,33,'NOW()','NOW()')
+,('WBPG8611','10','onions',8.6,3.14,'Snack',0,415,259,'NOW()','NOW()')
+,('VFDE4304','4','Salt',96.0,1.00,'Deli',1,127,83,'NOW()','NOW()')
+,('KHYT1504','2','bay leaves',7.0,920.02,'Pharmacy',0,293,426,'NOW()','NOW()');
 
 INSERT INTO users(google_id,name,email,phone_number,created_at,updated_at) VALUES
  ('1','Abbie, Abby','PSF@gmail.com',74034909,'NOW()','NOW()')
