@@ -80,7 +80,7 @@ function listItemsBySectionId(req, res) {
 function listItemsByKeyword(req, res) {
     console.log("GET /items/search}")
 
-    var keyword = '%' + 'req.body.keyword' + '%'
+    var keyword = '%' + req.body.keyword + '%'
     console.log(keyword)
 
     pool.query("SELECT * FROM items WHERE name like $1", [keyword], function (err, result) {
