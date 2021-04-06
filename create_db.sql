@@ -57,6 +57,7 @@ CREATE TABLE items (
   section_id int NOT NULL,
   name varchar(250) NOT NULL,
   cost double precision NOT NULL,
+  weight double precision NOT NULL,
   description varchar(1000) NOT NULL,
   requires_weighing int NOT NULL,
   x int NOT NULL,
