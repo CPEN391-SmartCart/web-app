@@ -27,5 +27,7 @@ app.get('/logs/:sessionId', routes.listLogsBySessionId)
 
 app.get('/items-test/:barcode', routes.getItemByBarcodeTest)
 
+app.post('/payment/:amount&:customerId&:paymentSourceId', routes.makePayment)
+
 
 module.exports = app
