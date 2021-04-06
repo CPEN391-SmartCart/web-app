@@ -57,6 +57,7 @@ CREATE TABLE items (
   section_id int NOT NULL,
   name varchar(250) NOT NULL,
   cost double precision NOT NULL,
+  weight double precision NOT NULL,
   description varchar(1000) NOT NULL,
   requires_weighing int NOT NULL,
   x int NOT NULL,
@@ -172,3 +173,27 @@ CREATE TABLE logs (
 );
 
 -- ALTER TABLE logs ADD CONSTRAINT logs_session_id_fk FOREIGN KEY (session_id) REFERENCES sessions(id);
+
+
+create table itemNodes (
+	barcode varchar(50) NOT NULL,
+	node_id int NOT NULL,
+	parent_node_id int NOT NULL,
+	current_cost int NOT NULL,
+	child_one_id int NOT NULL,
+	distance_child_one int NOT NULL,
+	child_two_id int NOT NULL,
+	distance_child_two int NOT NULL,
+	child_three_id int NOT NULL,
+	distance_child_three int NOT NULL,
+	child_four_id int NOT NULL,
+	distance_child_four int NOT NULL,
+	child_five_id int NOT NULL,
+	distance_child_five int NOT NULL,
+	child_six_id int NOT NULL,
+	distance_child_six int NOT NULL,
+	PRIMARY KEY (barcode),
+	FOREIGN KEY (barcode) REFERENCES items(barcode)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
+);
