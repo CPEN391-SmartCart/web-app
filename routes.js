@@ -1,5 +1,7 @@
 const { response } = require('express')
 const { pool } = require('./config')
+const Stripe = require('stripe')
+const stripe = new Stripe(process.env.STRIPE_KEY)
 
 function getStoreById(req, res) {
     console.log("GET /stores/{{storeId}}")
@@ -215,6 +217,27 @@ function listLogsBySessionId(req, res) {
     })
 }
 
+// Payment functions
+function makePayment(req, res) {
+    try {
+        // customer_id = cus_J0g8gEb9yZAmJL
+        // payment_source_id = card_1IPGCrF8GwWH2Z4EE9FQYYFN
+        const {amount, customerId, paymentSourceId} = req.params;
+        const charge = stripe.charges.create({
+            amount: amount,
+            currency: "CAD",
+            customer: customerId,
+            source: paymentSourceId,
+            description: "SmartCart"
+        })
+
+        res.status(200).json({ success: true , charge: charge});
+    } catch (error) {
+        res.status(500).json({ success: false, error });
+    }
+}
+
+
 // Data sanitization functions 
 function checkString(dataIn) {
     return false
@@ -242,5 +265,6 @@ module.exports = {
     listCartItemsBySessionId,
     listPurchasedItemsByReceiptId,
     listLogsBySessionId,
-    getItemByBarcodeTest
+    getItemByBarcodeTest,
+    makePayment
 }
