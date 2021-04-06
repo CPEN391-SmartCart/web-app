@@ -52,7 +52,7 @@ function getItemByBarcodeTest(req, res) {
 
 
 function getItemByBarcode(req, res) {
-    console.log("GET /items/{{barcode}}")
+    console.log("GET /items/barcode/{{barcode}}")
     pool.query("SELECT * FROM items WHERE barcode = $1", [req.params.barcode], function (err, result) {
         if (err) {
             res.status(400).send(err)
@@ -64,8 +64,20 @@ function getItemByBarcode(req, res) {
 }
 
 function listItemsBySectionId(req, res) {
-    console.log("GET /items/{{sectionId}}")
+    console.log("GET /items/section/{{sectionId}}")
     pool.query("SELECT * FROM items WHERE section_id = $1", [req.params.sectionId], function (err, result) {
+        if (err) {
+            res.status(400).send(err)
+            return
+        }
+        res.status(200).send(result.rows)
+        return
+    })
+}
+
+function listItemsByKeyword(req, res) {
+    console.log("GET /items/search/{{keyword}}")
+    pool.query("SELECT * FROM items WHERE name like $1", ['%' + req.params.sectionId + '%'], function (err, result) {
         if (err) {
             res.status(400).send(err)
             return
@@ -220,6 +232,7 @@ module.exports = {
     getItemByBarcode,
     getItemNodeByBarcode,
     listItemsBySectionId,
+    listItemsByKeyword,
     getReceiptBySessionId,
     listReceiptsByGoogleId,
     listCartItemsBySessionId,
