@@ -76,12 +76,12 @@ function listItemsBySectionId(req, res) {
 }
 
 function listItemsByKeyword(req, res) {
-    console.log("GET /items/search}")
+    console.log("GET /items/search?keyword=}")
 
-    var keyword = '%' + req.body.keyword + '%'
+    var keyword = '%' + req.query.keyword + '%'
     console.log(keyword)
 
-    pool.query("SELECT * FROM items WHERE name like $1", [keyword], function (err, result) {
+    pool.query("SELECT * FROM items WHERE LOWER(name) like LOWER($1)", [keyword], function (err, result) {
         if (err) {
             res.status(400).send(err)
             return
