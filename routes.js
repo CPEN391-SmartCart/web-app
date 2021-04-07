@@ -4,7 +4,7 @@ const Stripe = require('stripe')
 const stripe = new Stripe(process.env.STRIPE_KEY)
 
 function registerUser(req, res) {
-    console.log("GET /users/register")
+    console.log("POST /users/register")
     pool.query("INSERT INTO users(google_id, name, email) VALUES ($1, $2, $3)", [req.body.google_id, req.body.name, req.body.email], function (err, result) {
         if (err) {
             res.status(400).send(err)

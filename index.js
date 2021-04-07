@@ -24,8 +24,6 @@ app.get('/items/search', routes.listItemsByKeyword)
 app.get('/item-nodes/:barcode', routes.getItemNodeByBarcode)
 app.get('/receipts/:sessionId', routes.getReceiptBySessionId)
 app.get('/receipts/:googleId', routes.listReceiptsByGoogleId)
-app.get('/cart-items/:sessionId', routes.listCartItemsBySessionId)
-app.get('/purchased-items/:receiptId', routes.listPurchasedItemsByReceiptId)
 app.get('/logs/:sessionId', routes.listLogsBySessionId)
 app.get('/items-test/:barcode', routes.getItemByBarcodeTest)
 
