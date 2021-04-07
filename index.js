@@ -28,8 +28,7 @@ app.get('/items-test/:barcode', routes.getItemByBarcodeTest)
 app.get('/receipts/id/:googleId', routes.getCurrentReceiptIdByGoogleId)
 app.post('/receipts', routes.addReceipt)
 app.post('/receipt-items', routes.addReceiptItemByReceiptId)
-
+app.get('/receipt-items/:receiptId', routes.listReceiptItemsByReceiptId)
 app.post('/payment/:amount&:customerId&:paymentSourceId', routes.makePayment)
-
 
 module.exports = app

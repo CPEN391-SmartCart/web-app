@@ -135,6 +135,18 @@ function listReceiptsByGoogleId(req, res) {
     })
 }
 
+function listReceiptItemsByReceiptId(req, res) {
+    console.log("GET /receipt-items/{{receiptId}}")
+    pool.query("SELECT * FROM receiptsitems WHERE receipt_id = $1", [req.params.receiptId], function (err, result) {
+        if (err) {
+            res.status(400).send(err)
+            return
+        }
+        res.status(200).send(result.rows)
+        return
+    })
+}
+
 function addReceipt(req, res) {
     console.log("POST /receipts")
 
@@ -240,5 +252,6 @@ module.exports = {
     makePayment,
     getCurrentReceiptIdByGoogleId,
     addReceipt,
-    addReceiptItemByReceiptId
+    addReceiptItemByReceiptId,
+    listReceiptItemsByReceiptId
 }
