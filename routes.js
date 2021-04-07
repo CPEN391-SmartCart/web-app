@@ -123,19 +123,6 @@ function getItemNodeByBarcode(req, res) {
     })
 }
 
-function getReceiptBySessionId(req, res) {
-    console.log("GET /receipts/{{sessionId}}")
-    pool.query("SELECT * FROM receipts WHERE session_id = $1", [req.params.sessionId], function (err, result) {
-        if (err) {
-            res.status(400).send(err)
-            return
-        }
-        res.status(200).send(result.rows[0])
-        return
-    })
-
-}
-
 function listReceiptsByGoogleId(req, res) {
     console.log("GET /receipts/{{googleId}}")
     pool.query("SELECT * FROM receipts WHERE google_id = $1", [req.params.googleId], function (err, result) {
@@ -151,11 +138,40 @@ function listReceiptsByGoogleId(req, res) {
 function addReceipt(req, res) {
     console.log("POST /receipts")
 
+    pool.query("INSERT INTO receipts(google_id, subtotal, gst, pst, total, created_at) VALUES ($1,$2,$3,$4,$5,'NOW()')", [req.body.googleId, req.body.subTotal, req.body.gst, req.body.pst, req.body.total], function (err, result) {
+        if (err) {
+            res.status(400).send(err)
+            return
+        }
+        res.status(200).send(result.rows)
+        return
+    })
 }
 
-function addPurchasedItemByReceiptId(req, res) {
-    console.log("POST /purchased-items")
+function addReceiptItemByReceiptId(req, res) {
+    console.log("POST /receipt-items")
 
+    pool.query("INSERT INTO receiptsitems(receipt_id, name, cost, weight) VALUES (26, 'Butter', 5, 0.25)", [req.body.receiptId, req.body.name, req.body.cost, req.body.weight], function (err, result) {
+        if (err) {
+            res.status(400).send(err)
+            return
+        }
+        res.status(200).send(result.rows)
+        return
+    })
+}
+
+function getCurrentReceiptIdByGoogleId(req, res){
+    console.log("GET /receipts/id/{{googleId}}")
+
+    pool.query("SELECT DISTINCT MAX(id) FROM receipts WHERE google_id = $1", [req.params.googleId], function (err, result) {
+        if (err) {
+            res.status(400).send(err)
+            return
+        }
+        res.status(200).send(result.rows)
+        return
+    })
 }
 
 function addLogsBySessionId(req, res) {
@@ -209,7 +225,6 @@ function checkFloat(dataIn) {
     return false
 }
 
-
 module.exports = {
     registerUser,
     getStoreById,
@@ -219,9 +234,11 @@ module.exports = {
     getItemNodeByBarcode,
     listItemsBySectionId,
     listItemsByKeyword,
-    getReceiptBySessionId,
     listReceiptsByGoogleId,
     listLogsBySessionId,
     getItemByBarcodeTest,
-    makePayment
+    makePayment,
+    getCurrentReceiptIdByGoogleId,
+    addReceipt,
+    addReceiptItemByReceiptId
 }

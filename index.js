@@ -22,10 +22,12 @@ app.get('/items/barcode/:barcode', routes.getItemByBarcode)
 app.get('/items/section/:sectionId', routes.listItemsBySectionId)
 app.get('/items/search', routes.listItemsByKeyword)
 app.get('/item-nodes/:barcode', routes.getItemNodeByBarcode)
-app.get('/receipts/:sessionId', routes.getReceiptBySessionId)
 app.get('/receipts/:googleId', routes.listReceiptsByGoogleId)
 app.get('/logs/:sessionId', routes.listLogsBySessionId)
 app.get('/items-test/:barcode', routes.getItemByBarcodeTest)
+app.get('/receipts/id/:googleId', routes.getCurrentReceiptIdByGoogleId)
+app.post('/receipts', routes.addReceipt)
+app.post('/receipt-items', routes.addReceiptItemByReceiptId)
 
 app.post('/payment/:amount&:customerId&:paymentSourceId', routes.makePayment)
 
