@@ -51,8 +51,6 @@ INSERT INTO sections(x,y,width,height,legend_id) VALUES
 ,(75,115,10,16,3)
 ,(229,144,49,45,4);
 
-
-
 INSERT INTO items(barcode,section_id,name,cost, weight, description,requires_weighing,x,y,created_at,updated_at) VALUES
 ('XEAQ5424',6,'Advil',94,20,'Pharmacy',0,190,115,'2021-03-24 06:15:11.72186','2021-03-24 06:15:11.72186'),
 ('XGAO9797',5,'Doritos',56.5,57.3'Snack',1,71,44,'2021-03-24 06:15:11.72186','2021-03-24 06:15:11.72186'),
@@ -68,10 +66,10 @@ INSERT INTO items(barcode,section_id,name,cost, weight, description,requires_wei
 
 
 INSERT INTO users(google_id,name,email,phone_number,created_at,updated_at) VALUES
- ('1','Abbie, Abby','PSF@gmail.com',74034909,'NOW()','NOW()')
-,('2','Addie, Addy','NSH@gmail.com',58699835,'NOW()','NOW()')
-,('3','Allie','JRC@gmail.com',15952249,'NOW()','NOW()')
-,('4','Bab, Babbie','VLJ@gmail.com',02058128,'NOW()','NOW()')
+ ('a1','Abbie, Abby','PSF@gmail.com',74034909,'NOW()','NOW()')
+,('b2','Addie, Addy','NSH@gmail.com',58699835,'NOW()','NOW()')
+,('c3','Allie','JRC@gmail.com',15952249,'NOW()','NOW()')
+,('d4','Bab, Babbie','VLJ@gmail.com',02058128,'NOW()','NOW()')
 ,('5','Becca, Becky','FLY@gmail.com',14819274,'NOW()','NOW()')
 ,('6','Bede','PKQ@gmail.com',04293992,'NOW()','NOW()')
 ,('7','Bella','HMZ@gmail.com',32767547,'NOW()','NOW()')
@@ -89,87 +87,23 @@ INSERT INTO users(google_id,name,email,phone_number,created_at,updated_at) VALUE
 ,('19','Bartholomow','ERY@gmail.com',84575368,'NOW()','NOW()')
 ,('20','King George V','XVU@gmail.com',80405861,'NOW()','NOW()');
 
-INSERT INTO receipts(google_id,session_id,subtotal,gst,pst,total,discount,is_paid) VALUES
- (6,1,55.7,27.2,37.5,32.7,87.6,0.0)
-,(7,6,39.4,92.8,69.1,191.2,10.1,0.0)
-,(2,4,58.0,2.4,39.4,9.3,90.5,1.0)
-,(3,7,5.6,67.5,62.8,83.9,52.0,0.0)
-,(4,6,92.5,65.6,97.9,205.0,51.0,0.0)
-,(3,3,29.2,81.0,19.4,72.8,56.8,1.0)
-,(10,7,49.4,91.8,9.1,137.2,13.0,0.0)
-,(9,8,29.3,19.6,8.1,-38.7,95.7,0.0)
-,(3,10,39.3,79.5,54.8,104.1,69.5,0.0)
-,(2,9,40.5,64.6,78.7,182.9,0.9,0.0)
-,(6,5,96.7,42.9,51.7,136.8,54.5,1.0)
-,(8,7,75.6,24.4,43.2,45.9,97.3,1.0)
-,(3,1,92.7,49.7,84.9,219.2,8.1,1.0)
-,(6,6,58.2,55.6,64.3,173.7,4.3,1.0)
-,(5,5,2.8,63.6,67.6,64.4,69.6,1.0)
-,(8,5,12.7,68.2,39.5,56.5,64.0,1.0)
-,(6,6,28.4,18.7,9.3,21.6,34.7,1.0)
-,(4,5,50.5,35.2,82.2,135.7,32.1,0.0)
-,(6,8,58.3,85.1,4.5,83.5,64.4,1.0)
-,(1,10,29.2,28.7,33.9,67.8,23.9,0.0);
+INSERT INTO receipts(google_id,subtotal,gst,pst,total,created_at) VALUES
+ ('a1',11.2,1,2.5,14.7,'NOW()')
+,('b2',12.0,2.3,1.7,16.0,'NOW()')
+,('c3',125.5,4.5,10,140,'NOW()');
 
-
-INSERT INTO sessions(google_id,is_active,created_at) VALUES
- (5,0,'NOW()')
-,(4,0,'NOW()')
-,(2,1,'NOW()')
-,(2,0,'NOW()')
-,(2,0,'NOW()')
-,(10,1,'NOW()')
-,(7,1,'NOW()')
-,(10,1,'NOW()')
-,(9,1,'NOW()')
-,(9,0,'NOW()');
-
-
-INSERT INTO cartItems(session_id,barcode,quantity,weight,cost) VALUES
- (4,'SCEU6683',9,66.5,21.4)
-,(6,'SCEU6683',1,0.2,19.4)
-,(8,'XGAO9797',2,87.3,27.6)
-,(1,'OOAZ7866',10,76.9,88.8)
-,(10,'XEAQ5424',5,71.7,64.4)
-,(9,'ZTZZ2398',6,32.5,19.1)
-,(5,'XNQV4914',7,57.7,69.2)
-,(4,'XGAO9797',6,39.6,8.3)
-,(4,'OOAZ7866',7,30.4,66.9)
-,(8,'VUGQ0044',7,21.4,56.0)
-,(5,'THEY8635',3,36.7,53.4)
-,(2,'XEAQ5424',8,47.8,35.8)
-,(8,'XNQV4914',4,74.6,64.4)
-,(7,'ZTZZ2398',3,10.1,54.0)
-,(7,'XEAQ5424',9,46.6,52.8)
-,(4,'THEY8635',4,30.8,94.5)
-,(6,'VUGQ0044',1,82.4,76.4)
-,(8,'GNLK7691',3,37.6,22.3)
-,(8,'VUGQ0044',3,17.6,90.2)
-,(6,'XGAO9797',9,0.2,75.0);
-
-
-INSERT INTO purchasedItems(receipt_id,cart_item_id) VALUES
- (9,14)
-,(3,13)
-,(10,19)
-,(20,8)
-,(13,13)
-,(14,6)
-,(1,17)
-,(1,3)
-,(11,20)
-,(15,2)
-,(12,2)
-,(9,12)
-,(14,13)
-,(13,20)
-,(12,11)
-,(13,13)
-,(11,5)
-,(16,2)
-,(1,11)
-,(18,2);
-
+INSERT INTO receiptsitems(receipt_id,name,cost, weight) VALUES
+(24,'Advil',94,20),
+(24,'Doritos',56.5,57.3),
+(24,'Frozen Lasagna',28.2,11.2),
+(24,'Creole seasoning',60.6,420),
+(25,'2% Milk',72.1,9.11),
+(25,'Orange Juice',57.8,10.21),
+(25,'Gatorade',72.2,69.1),
+(26,'Black pepper',66.1,66.6),
+(26,'Chicken',45.1,80.0),
+(26,'Butter',16.7,81.35),
+(26,'Cookies',8.6,11.2);
 
 INSERT INTO logs(session_id,barcode,measured_weight) VALUES
  (6,'SCEU6683',25.0)
@@ -192,8 +126,6 @@ INSERT INTO logs(session_id,barcode,measured_weight) VALUES
 ,(1,'XNQV4914',12.8)
 ,(9,'XNQV4914',4.2)
 ,(5,'OOAZ7866',93.4);
-
-
 
 -- new DATA
 INSERT INTO legends (store_id, key, colour) VALUES 
