@@ -14,7 +14,7 @@ app.get('/_health', (req, res) => {
     res.status(200).send('Server status: healthy')
 })
 
-app.get('/users/register', routes.registerUser)
+app.post('/users/register', routes.registerUser)
 app.get('/stores/:storeId', routes.getStoreById)
 app.get('/legends/:storeId', routes.listLegendsByStoreId)
 app.get('/sections/:storeId', routes.listSectionsByStoreId)
