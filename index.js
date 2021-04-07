@@ -29,6 +29,8 @@ app.get('/receipts/id/:googleId', routes.getCurrentReceiptIdByGoogleId)
 app.post('/receipts', routes.addReceipt)
 app.post('/receipt-items', routes.addReceiptItemByReceiptId)
 app.get('/receipt-items/:receiptId', routes.listReceiptItemsByReceiptId)
+app.get('/stats/frequency/:googleId&:N', routes.getNMostFrequentlyPurchasedItems)
+app.get('/stats/totals/:googleId&:N', routes.getPastNTotals)
 app.post('/payment/:amount&:customerId&:paymentSourceId', routes.makePayment)
 
 module.exports = app

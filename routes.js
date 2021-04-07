@@ -203,6 +203,35 @@ function listLogsBySessionId(req, res) {
     })
 }
 
+// stats functions
+function getNMostFrequentlyPurchasedItems(req, res) {
+    console.log("GET /stats/frequency/{{google_id}}&{{N}}")
+
+    const {googleId, N} = req.params
+    pool.query("SELECT ri.name, COUNT(*) FROM receipts r, receiptsitems ri WHERE r.google_id = $1 AND r.id = ri.receipt_id GROUP BY ri.name ORDER BY COUNT(*) desc LIMIT $2", [googleId, N], function (err, result) {
+        if (err) {
+            res.status(400).send(err)
+            return
+        }
+        res.status(200).send(result.rows)
+        return
+    })
+}
+
+function getPastNTotals(req, res) {
+    console.log("GET /stats/totals/{{google_id}}&{{N}}")
+
+    const {googleId, N} = req.params
+    pool.query("SELECT total FROM receipts WHERE google_id = $1' ORDER BY created_at DESC LIMIT $2", [googleId, N], function (err, result) {
+        if (err) {
+            res.status(400).send(err)
+            return
+        }
+        res.status(200).send(result.rows)
+        return
+    })
+}
+
 // Payment functions
 function makePayment(req, res) {
     try {
@@ -253,5 +282,7 @@ module.exports = {
     getCurrentReceiptIdByGoogleId,
     addReceipt,
     addReceiptItemByReceiptId,
-    listReceiptItemsByReceiptId
+    listReceiptItemsByReceiptId,
+    getNMostFrequentlyPurchasedItems,
+    getPastNTotals
 }
