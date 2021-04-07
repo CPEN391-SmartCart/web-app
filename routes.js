@@ -151,7 +151,7 @@ function addReceipt(req, res) {
 function addReceiptItemByReceiptId(req, res) {
     console.log("POST /receipt-items")
 
-    pool.query("INSERT INTO receiptsitems(receipt_id, name, cost, weight) VALUES (26, 'Butter', 5, 0.25)", [req.body.receiptId, req.body.name, req.body.cost, req.body.weight], function (err, result) {
+    pool.query("INSERT INTO receiptsitems(receipt_id, name, cost, weight) VALUES ($1,$2,$3,$4)", [req.body.receiptId, req.body.name, req.body.cost, req.body.weight], function (err, result) {
         if (err) {
             res.status(400).send(err)
             return
