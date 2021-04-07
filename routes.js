@@ -3,6 +3,18 @@ const { pool } = require('./config')
 const Stripe = require('stripe')
 const stripe = new Stripe(process.env.STRIPE_KEY)
 
+function registerUser(req, res) {
+    console.log("GET /users/register")
+    pool.query("INSERT INTO users(google_id, name, email) VALUES ($1, $2, $3)", [req.body.google_id, req.body.name, req.body.email], function (err, result) {
+        if (err) {
+            res.status(400).send(err)
+            return
+        }
+        res.status(200).send(result.rows)
+        return
+    })
+}
+
 function getStoreById(req, res) {
     console.log("GET /stores/{{storeId}}")
     pool.query("SELECT * FROM stores WHERE id = $1", [req.params.storeId], function (err, result) {
@@ -141,60 +153,6 @@ function addReceipt(req, res) {
 
 }
 
-function updateReceipt(req, res) {
-    console.log("PUT /receipts")
-
-}
-
-function addSession(req, res) {
-    console.log("POST /sessions")
-
-}
-
-function updateSession(req, res) {
-    console.log("PUT /sessions")
-
-}
-
-function listCartItemsBySessionId(req, res) {
-    console.log("GET /cart-items/{{sessionId}}")
-    pool.query("SELECT * FROM cartItems WHERE session_id = $1", [req.params.sessionId], function (err, result) {
-        if (err) {
-            res.status(400).send(err)
-            return
-        }
-        res.status(200).send(result.rows)
-        return
-    })
-}
-
-function addCartItemBySessionId(req, res) {
-    console.log("POST /cart-items")
-
-}
-
-function removeCartItemBySessionIdAndBarcode(req, res) {
-    console.log("DELETE /cart-items")
-
-}
-
-function updateCartItemBySessionIdAndBarcode(req, res) {
-    console.log("PUT /cart-items")
-
-}
-
-function listPurchasedItemsByReceiptId(req, res) {
-    console.log("GET /purchased-items/{{receiptId}}")
-    pool.query("SELECT * FROM purchasedItems WHERE receipt_id = $1", [req.params.receiptId], function (err, result) {
-        if (err) {
-            res.status(400).send(err)
-            return
-        }
-        res.status(200).send(result.rows)
-        return
-    })
-}
-
 function addPurchasedItemByReceiptId(req, res) {
     console.log("POST /purchased-items")
 
@@ -253,6 +211,7 @@ function checkFloat(dataIn) {
 
 
 module.exports = {
+    registerUser,
     getStoreById,
     listLegendsByStoreId,
     listSectionsByStoreId,
@@ -262,8 +221,6 @@ module.exports = {
     listItemsByKeyword,
     getReceiptBySessionId,
     listReceiptsByGoogleId,
-    listCartItemsBySessionId,
-    listPurchasedItemsByReceiptId,
     listLogsBySessionId,
     getItemByBarcodeTest,
     makePayment
