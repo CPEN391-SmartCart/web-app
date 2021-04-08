@@ -220,7 +220,7 @@ function getNMostFrequentlyPurchasedItems(req, res) {
 function getPastNTotals(req, res) {
     console.log("GET /stats/totals")
 
-    pool.query("SELECT total FROM receipts WHERE google_id = $1' ORDER BY created_at DESC LIMIT $2", [req.query.googleId, req.query.N], function (err, result) {
+    pool.query("SELECT total FROM receipts WHERE google_id = $1 ORDER BY created_at DESC LIMIT $2", [req.query.googleId, req.query.N], function (err, result) {
         if (err) {
             res.status(400).send(err)
             return
