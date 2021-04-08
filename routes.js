@@ -150,7 +150,7 @@ function listReceiptItemsByReceiptId(req, res) {
 function addReceipt(req, res) {
     console.log("POST /receipts")
 
-    pool.query("INSERT INTO receipts(google_id, subtotal, gst, pst, total, created_at) VALUES ($1,$2,$3,$4,$5,'NOW()')", [req.body.googleId, req.body.subTotal, req.body.gst, req.body.pst, req.body.total], function (err, result) {
+    pool.query("INSERT INTO receipts(google_id, subtotal, gst, total, created_at) VALUES ($1,$2,$3,$4,'NOW()')", [req.body.googleId, req.body.subTotal, req.body.gst, req.body.total], function (err, result) {
         if (err) {
             res.status(400).send(err)
             return
