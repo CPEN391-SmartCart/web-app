@@ -1,7 +1,6 @@
 const { response } = require('express')
 const { pool } = require('./config')
-const Stripe = require('stripe')
-const stripe = new Stripe(process.env.STRIPE_KEY)
+const stripe = require('stripe')(process.env.STRIPE_KEY)
 
 function registerUser(req, res) {
     console.log("POST /users/register")
@@ -213,7 +212,7 @@ function listLogsBySessionId(req, res) {
 function getNMostFrequentlyPurchasedItems(req, res) {
     console.log("GET /stats/frequency")
 
-    pool.query("SELECT ri.name, i.cost, COUNT(*) FROM receipts r, receiptsitems ri, items i WHERE r.google_id = $1 AND r.id = ri.receipt_id AND ri.name = i.name GROUP BY ri.name, i.cost ORDER BY COUNT(*) desc LIMIT $2", [req.query.googleId, req.query.N], function (err, result) {
+    pool.query("SELECT ri.name, i.cost, SUM (ri.quantity) FROM receipts r, receiptsitems ri, items i WHERE r.id = ri.receipt_id AND ri.name = i.name AND r.google_id = $1 GROUP BY ri.name, i.cost HAVING SUM(ri.quantity) IS NOT NULL ORDER BY SUM(ri.quantity) DESC LIMIT $2", [req.query.googleId, req.query.N], function (err, result) {
         if (err) {
             res.status(400).send(err)
             return
@@ -237,20 +236,15 @@ function getPastNTotals(req, res) {
 }
 
 // Payment functions
-function makePayment(req, res) {
+async function makePayment(req, res) {
     try {
-        // customer_id = cus_J0g8gEb9yZAmJL
-        // payment_source_id = card_1IPGCrF8GwWH2Z4EE9FQYYFN
-        const {amount, customerId, paymentSourceId} = req.body;
-        const charge = stripe.charges.create({
+        const amount = req.body.amount;
+        const paymentIntent = await stripe.paymentIntents.create({
             amount: amount,
-            currency: "CAD",
-            customer: customerId,
-            source: paymentSourceId,
-            description: "SmartCart"
-        })
+            currency: "cad"
+        });
 
-        res.status(200).json({ success: true , charge: charge});
+        res.status(200).json({ success: true, clientSecret: paymentIntent.client_secret });
     } catch (error) {
         res.status(500).json({ success: false, error });
     }
