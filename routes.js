@@ -235,7 +235,7 @@ function makePayment(req, res) {
     try {
         // customer_id = cus_J0g8gEb9yZAmJL
         // payment_source_id = card_1IPGCrF8GwWH2Z4EE9FQYYFN
-        const {amount, customerId, paymentSourceId} = req.params;
+        const {amount, customerId, paymentSourceId} = req.body;
         const charge = stripe.charges.create({
             amount: amount,
             currency: "CAD",

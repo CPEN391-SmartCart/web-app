@@ -31,6 +31,6 @@ app.post('/receipt-items', routes.addReceiptItemByReceiptId)
 app.get('/receipt-items/:receiptId', routes.listReceiptItemsByReceiptId)
 app.get('/stats/frequency', routes.getNMostFrequentlyPurchasedItems)
 app.get('/stats/totals', routes.getPastNTotals)
-app.post('/payment/:amount&:customerId&:paymentSourceId', routes.makePayment)
+app.post('/payment', routes.makePayment)
 
 module.exports = app
