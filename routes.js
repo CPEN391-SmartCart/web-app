@@ -213,7 +213,7 @@ function listLogsBySessionId(req, res) {
 function getNMostFrequentlyPurchasedItems(req, res) {
     console.log("GET /stats/frequency")
 
-    pool.query("SELECT ri.name, COUNT(*) FROM receipts r, receiptsitems ri WHERE r.google_id = $1 AND r.id = ri.receipt_id GROUP BY ri.name ORDER BY COUNT(*) desc LIMIT $2", [req.query.googleId, req.query.N], function (err, result) {
+    pool.query("SELECT ri.name, i.cost, COUNT(*) FROM receipts r, receiptsitems ri, items i WHERE r.google_id = $1 AND r.id = ri.receipt_id AND ri.name = i.name GROUP BY ri.name, i.cost ORDER BY COUNT(*) desc LIMIT $2", [req.query.googleId, req.query.N], function (err, result) {
         if (err) {
             res.status(400).send(err)
             return
