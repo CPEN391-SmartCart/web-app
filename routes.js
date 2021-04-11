@@ -1,7 +1,6 @@
 const { response } = require('express')
 const { pool } = require('./config')
-const Stripe = require('stripe')
-const stripe = new Stripe(process.env.STRIPE_KEY)
+const stripe = require('stripe')(process.env.STRIPE_KEY)
 
 function registerUser(req, res) {
     console.log("POST /users/register")
@@ -245,7 +244,7 @@ function makePayment(req, res) {
             currency: "cad"
         });
 
-        res.status(200).json({ success: true , clientSecret: paymentIntent.client_secret});
+        res.status(200).json({ success: true, clientSecret: paymentIntent.client_secret });
     } catch (error) {
         res.status(500).json({ success: false, error });
     }
