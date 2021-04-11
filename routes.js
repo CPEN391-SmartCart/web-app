@@ -72,7 +72,13 @@ function getItemByBarcode(req, res) {
             res.status(400).send(err)
             return
         }
-        res.status(200).send(result.rows[0])
+
+        if(result.rows.length){
+            res.status(200).send(result.rows[0])
+        } else {
+            res.status(204).send()    
+        }
+
         return
     })
 }
@@ -163,7 +169,7 @@ function addReceipt(req, res) {
 function addReceiptItemByReceiptId(req, res) {
     console.log("POST /receipt-items")
 
-    pool.query("INSERT INTO receiptsitems(receipt_id, name, cost, weight) VALUES ($1,$2,$3,$4)", [req.body.receiptId, req.body.name, req.body.cost, req.body.weight], function (err, result) {
+    pool.query("INSERT INTO receiptsitems(receipt_id, name, cost, weight, quantity) VALUES ($1,$2,$3,$4,$5)", [req.body.receiptId, req.body.name, req.body.cost, req.body.weight, req.body.quantity], function (err, result) {
         if (err) {
             res.status(400).send(err)
             return
