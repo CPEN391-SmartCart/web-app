@@ -72,7 +72,13 @@ function getItemByBarcode(req, res) {
             res.status(400).send(err)
             return
         }
-        res.status(200).send(result.rows[0])
+
+        if(result.rows.length){
+            res.status(200).send(result.rows[0])
+        } else {
+            res.status(204).send()    
+        }
+
         return
     })
 }
