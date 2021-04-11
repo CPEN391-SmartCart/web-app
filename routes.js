@@ -239,18 +239,13 @@ function getPastNTotals(req, res) {
 // Payment functions
 function makePayment(req, res) {
     try {
-        // customer_id = cus_J0g8gEb9yZAmJL
-        // payment_source_id = card_1IPGCrF8GwWH2Z4EE9FQYYFN
-        const {amount, customerId, paymentSourceId} = req.body;
-        const charge = stripe.charges.create({
+        const amount = req.body.amount;
+        const paymentIntent = stripe.paymentIntents.create({
             amount: amount,
-            currency: "CAD",
-            customer: customerId,
-            source: paymentSourceId,
-            description: "SmartCart"
-        })
+            currency: "cad"
+        });
 
-        res.status(200).json({ success: true , charge: charge});
+        res.status(200).json({ success: true , clientSecret: paymentIntent.client_secret});
     } catch (error) {
         res.status(500).json({ success: false, error });
     }
