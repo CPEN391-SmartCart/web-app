@@ -236,10 +236,10 @@ function getPastNTotals(req, res) {
 }
 
 // Payment functions
-function makePayment(req, res) {
+async function makePayment(req, res) {
     try {
         const amount = req.body.amount;
-        const paymentIntent = stripe.paymentIntents.create({
+        const paymentIntent = await stripe.paymentIntents.create({
             amount: amount,
             currency: "cad"
         });
