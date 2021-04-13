@@ -2,6 +2,10 @@ const { response } = require('express')
 const { pool } = require('./config')
 const stripe = require('stripe')(process.env.STRIPE_KEY)
 
+/* 
+ * Creates a new google account user on our database.
+ * Request body expects google_id, name and email.
+ */
 function registerUser(req, res) {
     console.log("POST /users/register")
     pool.query("INSERT INTO users(google_id, name, email) VALUES ($1, $2, $3)", [req.body.google_id, req.body.name, req.body.email], function (err, result) {
@@ -14,6 +18,9 @@ function registerUser(req, res) {
     })
 }
 
+/*
+ * Gets the store information by store id.
+ */
 function getStoreById(req, res) {
     console.log("GET /stores/{{storeId}}")
     pool.query("SELECT * FROM stores WHERE id = $1", [req.params.storeId], function (err, result) {
@@ -26,6 +33,9 @@ function getStoreById(req, res) {
     })
 }
 
+/*
+ * Lists all the legends belonging to a store by its id.
+ */
 function listLegendsByStoreId(req, res) {
     console.log("GET /legends/{{storeId}}")
     pool.query("SELECT * FROM legends WHERE store_id = $1", [req.params.storeId], function (err, result) {
@@ -38,6 +48,9 @@ function listLegendsByStoreId(req, res) {
     })
 }
 
+/*
+ * Lists all the sections belonging to a store by its id.
+ */
 function listSectionsByStoreId(req, res) {
     console.log("GET /sections/{{storeId}}")
     pool.query("SELECT s.x, s.y, s.width, s.height, l.colour FROM sections s inner join legends l ON s.legend_id=l.id AND store_id = $1", [req.params.storeId], function (err, result) {
@@ -50,20 +63,9 @@ function listSectionsByStoreId(req, res) {
     })
 }
 
-
-function getItemByBarcodeTest(req, res) {
-    console.log("GET /items/{{barcode}}")
-    pool.query("SELECT i.* , l.colour FROM items i inner join sections s ON i.section_id = s.id AND barcode = $1 inner join legends l on s.legend_id = l.id ", [req.params.barcode], function (err, result) {
-        if (err) {
-            res.status(400).send(err)
-            return
-        }
-        res.status(200).send(result.rows[0])
-        return
-    })
-}
-
-
+/*
+ * Gets an item by its barcode.
+ */
 function getItemByBarcode(req, res) {
     console.log("GET /items/barcode/{{barcode}}")
     pool.query("SELECT * FROM items WHERE barcode = $1", [req.params.barcode], function (err, result) {
@@ -82,6 +84,24 @@ function getItemByBarcode(req, res) {
     })
 }
 
+/*
+ * Gets an item by its barcode (alternate).
+ */
+function getItemByBarcodeTest(req, res) {
+    console.log("GET /items/{{barcode}}")
+    pool.query("SELECT i.* , l.colour FROM items i inner join sections s ON i.section_id = s.id AND barcode = $1 inner join legends l on s.legend_id = l.id ", [req.params.barcode], function (err, result) {
+        if (err) {
+            res.status(400).send(err)
+            return
+        }
+        res.status(200).send(result.rows[0])
+        return
+    })
+}
+
+/*
+ * Lists all items in a section.
+ */
 function listItemsBySectionId(req, res) {
     console.log("GET /items/section/{{sectionId}}")
     pool.query("SELECT * FROM items WHERE section_id = $1", [req.params.sectionId], function (err, result) {
@@ -94,6 +114,9 @@ function listItemsBySectionId(req, res) {
     })
 }
 
+/*
+ * Lists items matching a keyword.
+ */
 function listItemsByKeyword(req, res) {
     console.log("GET /items/search?keyword=}")
 
@@ -110,6 +133,9 @@ function listItemsByKeyword(req, res) {
     })
 }
 
+/*
+ * Gets an items node information by barcode.
+ */
 function getItemNodeByBarcode(req, res) {
     console.log("GET /item-nodes/{{barcode}}")
     var query = "SELECT x, y, node_id, parent_node_id, current_cost, \n" +
@@ -128,6 +154,9 @@ function getItemNodeByBarcode(req, res) {
     })
 }
 
+/*
+ * Lists receipts by google id.
+ */
 function listReceiptsByGoogleId(req, res) {
     console.log("GET /receipts/{{googleId}}")
     pool.query("SELECT * FROM receipts WHERE google_id = $1", [req.params.googleId], function (err, result) {
@@ -140,6 +169,9 @@ function listReceiptsByGoogleId(req, res) {
     })
 }
 
+/*
+ * Lists receipt items by receipt id.
+ */
 function listReceiptItemsByReceiptId(req, res) {
     console.log("GET /receipt-items/{{receiptId}}")
     pool.query("SELECT * FROM receiptsitems WHERE receipt_id = $1", [req.params.receiptId], function (err, result) {
@@ -152,6 +184,10 @@ function listReceiptItemsByReceiptId(req, res) {
     })
 }
 
+/*
+ * Creates a new receipt.
+ * Request body expects google_id, subtotal, gst and total.
+ */
 function addReceipt(req, res) {
     console.log("POST /receipts")
 
@@ -165,6 +201,10 @@ function addReceipt(req, res) {
     })
 }
 
+/*
+ * Adds receipt items by receipt id.
+ * Request body expects receipt_id, name, cost, weight and quantity.
+ */
 function addReceiptItemByReceiptId(req, res) {
     console.log("POST /receipt-items")
 
@@ -178,6 +218,9 @@ function addReceiptItemByReceiptId(req, res) {
     })
 }
 
+/*
+ * Gets current receipt id by google id.
+ */
 function getCurrentReceiptIdByGoogleId(req, res){
     console.log("GET /receipts/id/{{googleId}}")
 
@@ -191,11 +234,9 @@ function getCurrentReceiptIdByGoogleId(req, res){
     })
 }
 
-function addLogsBySessionId(req, res) {
-    console.log("POST /logs")
-
-}
-
+/*
+ * Lists logs by session id.
+ */
 function listLogsBySessionId(req, res) {
     console.log("GET /logs/{{sessionId}}")
     pool.query("SELECT * FROM logs WHERE session_id = $1", [req.params.sessionId], function (err, result) {
@@ -208,7 +249,9 @@ function listLogsBySessionId(req, res) {
     })
 }
 
-// stats functions
+/*
+ * Gets the most frequently purchased items by google id.
+ */
 function getNMostFrequentlyPurchasedItems(req, res) {
     console.log("GET /stats/frequency")
 
@@ -222,6 +265,9 @@ function getNMostFrequentlyPurchasedItems(req, res) {
     })
 }
 
+/*
+ * Gets past shopping session totals by google id.
+ */
 function getPastNTotals(req, res) {
     console.log("GET /stats/totals")
 
@@ -235,7 +281,9 @@ function getPastNTotals(req, res) {
     })
 }
 
-// Payment functions
+/*
+ * Completes a payment via stripe api.
+ */
 async function makePayment(req, res) {
     try {
         const amount = req.body.amount;
@@ -248,20 +296,6 @@ async function makePayment(req, res) {
     } catch (error) {
         res.status(500).json({ success: false, error });
     }
-}
-
-
-// Data sanitization functions 
-function checkString(dataIn) {
-    return false
-}
-
-function checkInt(dataIn) {
-    return false
-}
-
-function checkFloat(dataIn) {
-    return false
 }
 
 module.exports = {
